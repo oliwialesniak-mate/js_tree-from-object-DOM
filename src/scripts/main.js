@@ -28,17 +28,14 @@ const tree = document.querySelector('#tree');
 function createTree(element, data) {
   if (!data || typeof data !== 'object') return;
 
-  const keys = Object.keys(data);
-  if (!keys.length) return; // Don't create <ul> for empty objects
-
   const ul = document.createElement('ul');
 
-  keys.forEach(key => {
+  Object.keys(data).forEach(key => {
     const li = document.createElement('li');
     li.textContent = key;
 
-    // Recursively create nested list if the value is an object
-    if (data[key] && typeof data[key] === 'object' && Object.keys(data[key]).length) {
+    // Recursively create nested list for any object, even if empty
+    if (data[key] && typeof data[key] === 'object') {
       createTree(li, data[key]);
     }
 
